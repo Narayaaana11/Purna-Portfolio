@@ -33,7 +33,7 @@ const About = () => {
           >
             <div className="relative w-full max-w-sm mx-auto aspect-[4/5] rounded-2xl overflow-hidden shadow-xl border-2 border-gray-700">
               <Image
-                src="/images/purna-about.jpg"
+                src="/images/purna.jpg"
                 alt="Purna - profile photo 2"
                 fill
                 className="object-cover grayscale-100 hover:grayscale-0 transition-all duration-300"
