@@ -6,9 +6,6 @@ import { TbBrandTypescript } from "react-icons/tb";
 import { RiTailwindCssLine } from "react-icons/ri";
 import { SiExpress } from "react-icons/si";
 import { SiPostgresql } from "react-icons/si";
-import { RiAndroidLine } from "react-icons/ri";
-import { TbBrandKotlin } from "react-icons/tb";
-import { SiJetpackcompose } from "react-icons/si";
 import { TbBrandMongodb } from "react-icons/tb";
 import { DiRedis } from "react-icons/di";
 import { TbBrandJavascript } from "react-icons/tb";
@@ -20,15 +17,11 @@ import { TbBrandCloudflare } from "react-icons/tb";
 
 export interface SkillItem {
   name: string;
-  logo: IconType; // URL or /public path
+  logo: IconType;
 }
 
-export interface SkillGroup {
-  title: string;
-  skills: SkillItem[];
-}
-
-export const skillsData: SkillGroup[] = [
+// Kept this structure for easy data management
+export const skillsData = [
   {
     title: "Frontend",
     skills: [
@@ -54,19 +47,14 @@ export const skillsData: SkillGroup[] = [
       { name: "Cloudflare", logo: TbBrandCloudflare },
     ],
   },
-  {
-    title: "Mobile",
-    skills: [
-      { name: "Android", logo: RiAndroidLine },
-      { name: "Kotlin", logo: TbBrandKotlin },
-      { name: "Jetpack Compose", logo: SiJetpackcompose },
-    ],
-  },
 ];
 
 const Skills = () => {
+  // Flatten the skillsData array into a single array of skills
+  const allSkills = skillsData.flatMap((group) => group.skills);
+
   return (
-    <section className="w-full mt-25 px-6">
+    <section id="skills" className="w-full mt-25 px-6">
       <div className="max-w-7xl mx-auto flex flex-col gap-2 justify-center items-center">
         <div className="text-center flex flex-col justify-center items-center">
           <span className="underline decoration-1 decoration-red-500">
@@ -79,10 +67,18 @@ const Skills = () => {
             Technologies I use to craft digital experiences
           </p>
         </div>
-        <div className="max-w-4xl">
-          <div className="mt-6 flex flex-col md:flex-row  w-full gap-4 border border-gray-700 text-gray-300 backdrop-blur-3xl bg-[#161B22]/70 p-8 rounded-2xl">
-            {skillsData.map((skill) => (
-              <SkillsCard key={skill.title} group={skill} />
+
+        {/* --- New Grid Container --- */}
+        <div className="w-full max-w-5xl">
+          <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {allSkills.map((skill) => (
+              <div
+                key={skill.name}
+                className="text-gray-400 decoration-red-500 flex items-center justify-center gap-2 border border-gray-700 bg-[#0D1117] px-4 py-3 rounded-md"
+              >
+                <skill.logo size={20} />
+                <span className="text-sm font-medium">{skill.name}</span>
+              </div>
             ))}
           </div>
         </div>
@@ -93,22 +89,4 @@ const Skills = () => {
 
 export default Skills;
 
-const SkillsCard = ({ group }: { group: SkillGroup }) => {
-  return (
-    <div key={group.title}>
-      <h2 className="font-medium text-white pb-2 mb-4">{group.title}</h2>
-
-      <div className="flex flex-wrap gap-6 justify-start items-center">
-        {group.skills.map((skill) => (
-          <div
-            key={skill.name}
-            className="text-gray-400 hover:text-foreground hover:decoration-1 hover:underline decoration-red-500 flex items-center gap-2 border border-gray-700 bg-[#0D1117] px-4 py-2 rounded-md hover:scale-105 hover:rotate-3 transition-transform"
-          >
-            <skill.logo />
-            <span className="text-sm font-medium">{skill.name}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+// --- Removed the SkillsCard sub-component as it's no longer needed ---

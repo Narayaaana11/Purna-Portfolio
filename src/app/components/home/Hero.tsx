@@ -1,73 +1,131 @@
-import { InstagramIcon, MailIcon, SendIcon } from "lucide-react";
+"use client";
+
+import {
+  InstagramIcon,
+  MailIcon,
+  SendIcon,
+  GithubIcon,
+  LinkedinIcon,
+} from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import "./hero.css";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
 const Hero = () => {
+  // Common style for social links
+  const socialLinkClass =
+    "p-2 text-gray-400 hover:text-gray-100 transition-all duration-200 hover:scale-110 rounded-lg";
+
+  // Animation variants for the container (staggers children)
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.2, // Start after a short delay
+        staggerChildren: 0.15, // Each child animates 0.15s after the previous
+      },
+    },
+  };
+
+  // Animation variants for each item (fades up)
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
   return (
-    <section className="w-full mt-35 px-6">
-      <div className="max-w-7xl mx-auto flex flex-col gap-2 justify-center items-center">
-        <div className="group relative w-32 sm:w-40 md:w-48 lg:w-56 aspect-square overflow-hidden rounded-full  transition-all duration-300">
+    <section
+      id="home"
+      className="w-full mt-35 px-6 pt-24 pb-12 overflow-hidden"
+    >
+      <motion.div
+        className="max-w-7xl mx-auto flex flex-col gap-6 justify-center items-center"
+        initial="hidden"
+        animate="show"
+        variants={containerVariants}
+      >
+        <motion.div
+          className="group relative w-32 sm:w-40 md:w-48 lg:w-56 aspect-square overflow-hidden rounded-full transition-all duration-300"
+          variants={itemVariants}
+        >
           <Image
-            src="https://avatars.githubusercontent.com/u/57430072?v=4"
-            alt="Sohel Sayyed - profile photo"
+            src="/images/purna.jpg" // Uses the /public/images/purna.jpg path
+            alt="Purna - profile photo"
             fill
+            priority
             className="grayscale-100 hover:grayscale-0 object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
           />
-        </div>
-        <div className="flex flex-col justify-center items-center gap-4 max-w-3xl">
+        </motion.div>
 
-          <div>
-            <span>Hi, I&apos;m</span>
+        <motion.div
+          className="flex flex-col justify-center items-center gap-5 max-w-3xl text-center"
+          variants={itemVariants}
+        >
+          <div className="flex flex-col gap-2">
+            <span className="text-lg text-gray-400">Hi, I&apos;m</span>
             <h1 className="font-display tracking-wide text-5xl font-bold text-gray-50">
-              Sohel Sayyed
+              Purna
             </h1>
+            {/* --- UPDATED H2 --- */}
+            <h2 className="font-semibold text-2xl text-blue-400 animate-pulse">
+              Full-Stack Developer
+            </h2>
           </div>
-          <SkillsSlider />
-          <div>
-            <ul className="flex gap-3 justify-center items-center">
-              <li className="hover:text-gray-50 hover:border-b-[0.5px] p-1">
-                <InstagramIcon />
-              </li>
-              <li className="hover:text-gray-50 hover:border-b-[0.5px] p-1">
+        </motion.div>
+
+        <motion.div variants={itemVariants}>
+          {" "}
+          <ul className="flex gap-3 justify-center items-center">
+            <li>
+              <Link
+                href="https://linkedin.com/in/YOUR_USERNAME" // <-- CHANGEME
+                target="_blank"
+                rel="noopener noreferrer"
+                title="LinkedIn"
+                className={socialLinkClass}
+              >
+                <LinkedinIcon />
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="https://github.com/YOUR_USERNAME" // <-- CHANGEME
+                target="_blank"
+                rel="noopener noreferrer"
+                title="GitHub"
+                className={socialLinkClass}
+              >
+                <GithubIcon />
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="mailto:your.email@example.com" // <-- CHANGEME
+                title="Email"
+                className={socialLinkClass}
+              >
                 <MailIcon />
-              </li>
-              <li className="hover:text-gray-50 hover:border-b-[0.5px] p-1">
-                <SendIcon />
-              </li>
-            </ul>
-          </div>
+              </Link>
+            </li>
+          </ul>
+        </motion.div>
 
-          <p className="text-lg">
-            I&apos;m Sayyed Sohel, a professional with extensive experience in
-            <span>crafting user-friendly websites </span>and powerful{" "}
-            <span>Android applications</span>. I can help you bring your digital
-            ideas to life, whether it&apos;s a sleek and modern website, a
-            feature-rich mobile app, or both!
-          </p>
-
-          {/* <SkillsSlider /> */}
-        </div>
-      </div>
+        {/* --- UPDATED PARAGRAPH --- */}
+        <motion.p
+          className="text-lg text-gray-300 text-center max-w-2xl" // Added text-center and max-width
+          variants={itemVariants}
+        >
+          A full-stack developer bridging the gap between web and mobile. I craft
+          seamless, high-performance applications using{" "}
+          <strong className="text-gray-100">React</strong>,{" "}          <strong className="text-gray-100">Node.js</strong>, complemented by
+          expertise in native{" "}
+          <strong className="text-gray-100">Android development</strong>.
+        </motion.p>
+      </motion.div>
     </section>
   );
 };
 
 export default Hero;
-
-
-// slider style come from hero.css file.
-const SkillsSlider = () => {
-  return (
-    <div className="flex gap-2 justify-center items-baseline">
-      {/* <div>I am</div> */}
-      <div className="slider">
-        <div className="slides ">
-          <div className="underline decoration-1 decoration-blue-500">Android Dev</div>
-          <div className="underline decoration-1 decoration-red-500">Fullstack Dev</div>
-        </div>
-      </div>
-    </div>
-  );
-};
-  
