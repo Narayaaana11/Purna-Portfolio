@@ -20,17 +20,21 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // In a real app, you'd send this data to an API endpoint
     console.log("Form data submitted:", formData);
-    alert("Thank you for your message!");
+    
+    // Removed the alert() and just reset the form
     setFormData({ name: "", "email": "", message: "" });
   };
 
+  // Common style for input fields
   const inputStyle =
     "w-full p-3 rounded-lg bg-[#0D1117] border border-gray-700 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500";
 
   return (
     <section id="contact" className="w-full mt-25 px-6 py-16 overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col gap-12 justify-center items-center">
+        {/* --- Title --- */}
         <motion.div
           className="text-center flex flex-col justify-center items-center"
           initial={{ opacity: 0, y: 20 }}
@@ -39,14 +43,16 @@ const Contact = () => {
           transition={{ duration: 0.5 }}
         >
           <span className="underline decoration-1 decoration-red-500">
-            Let's Talk
+            Let&apos;s Talk {/* <-- Fixed apostrophe */}
           </span>
           <h2 className="font-display tracking-wide text-4xl font-bold text-gray-50">
             Get in Touch
           </h2>
         </motion.div>
 
+        {/* --- Content Grid --- */}
         <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-12">
+          {/* --- Left Column: Contact Info --- */}
           <motion.div
             className="flex flex-col gap-6"
             initial={{ opacity: 0, x: -50 }}
@@ -57,15 +63,14 @@ const Contact = () => {
             <h3 className="text-2xl font-display font-semibold text-gray-50">
               Contact Information
             </h3>
-            {/* --- THIS IS THE FIX --- */}
             <p className="text-gray-400">
-              Feel free to reach out to me directly or use the form. I&apos;m
+              Feel free to reach out to me directly or use the form. I&apos;m {/* <-- Fixed apostrophe */}
               always open to discussing new projects, creative ideas, or
               opportunities.
             </p>
-            {/* --- END FIX --- */}
+
             <a
-              href="mailto:24m11mc045@adityauiversity.in"
+              href="mailto:24m11mc045@adityauiversity.in" // From PDF
               className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors"
             >
               <MailIcon
@@ -75,7 +80,7 @@ const Contact = () => {
               <span>24m11mc045@adityauiversity.in</span>
             </a>
             <a
-              href="tel:+918688313600"
+              href="tel:+918688313600" // From PDF
               className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors"
             >
               <PhoneIcon
@@ -110,6 +115,7 @@ const Contact = () => {
             </a>
           </motion.div>
 
+          {/* --- Right Column: Form --- */}
           <motion.form
             onSubmit={handleSubmit}
             className="flex flex-col gap-4"
