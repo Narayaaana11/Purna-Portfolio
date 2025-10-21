@@ -5,15 +5,14 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { GithubIcon, ArrowUpRight } from "lucide-react";
 
-// 1. DEFINE PROJECT DATA
 export interface Project {
   id: number;
   title: string;
   description: string;
-  imageUrl: string; // Using online URLs
+  imageUrl: string;
   tags: string[];
   githubUrl: string;
-  liveUrl?: string; // Optional live demo link
+  liveUrl?: string;
 }
 
 export const projectsData: Project[] = [
@@ -25,8 +24,8 @@ export const projectsData: Project[] = [
     imageUrl:
       "https://images.unsplash.com/photo-1522204523234-8729aa6e3d5f?q=80&w=1740&auto=format&fit=crop",
     tags: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Tailwind CSS"],
-    githubUrl: "https://github.com/YOUR_USERNAME/ecommerce-project", // <-- CHANGEME
-    liveUrl: "https://your-project-live-url.com", // <-- CHANGEME
+    githubUrl: "https://github.com/YOUR_USERNAME/ecommerce-project",
+    liveUrl: "https://your-project-live-url.com",
   },
   {
     id: 2,
@@ -36,8 +35,7 @@ export const projectsData: Project[] = [
     imageUrl:
       "https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1740&auto=format&fit=crop",
     tags: ["React", "Node.js", "Express", "WebSocket", "MongoDB"],
-    githubUrl: "https://github.com/YOUR_USERNAME/chat-app-project", // <-- CHANGEME
-    // liveUrl: undefined (no live demo for this one)
+    githubUrl: "https://github.com/YOUR_USERNAME/chat-app-project",
   },
   {
     id: 3,
@@ -47,8 +45,8 @@ export const projectsData: Project[] = [
     imageUrl:
       "https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=1740&auto=format&fit=crop",
     tags: ["Next.js", "Node.js", "MongoDB", "REST API", "Tailwind CSS"],
-    githubUrl: "https://github.com/YOUR_USERNAME/blog-project", // <-- CHANGEME
-    liveUrl: "https://your-blog-live-url.com", // <-- CHANGEME
+    githubUrl: "https://github.com/YOUR_USERNAME/blog-project",
+    liveUrl: "https://your-blog-live-url.com",
   },
   {
     id: 4,
@@ -58,16 +56,14 @@ export const projectsData: Project[] = [
     imageUrl:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1740&auto=format&fit=crop",
     tags: ["React", "Python", "Flask", "Chart.js", "TypeScript"],
-    githubUrl: "https://github.com/YOUR_USERNAME/dashboard-project", // <-- CHANGEME
+    githubUrl: "https://github.com/YOUR_USERNAME/dashboard-project",
   },
 ];
 
-// 2. MAIN PROJECTS COMPONENT
 const Projects = () => {
   return (
     <section id="projects" className="w-full mt-25 px-6 py-16 overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col gap-12 justify-center items-center">
-        {/* --- Title --- */}
         <motion.div
           className="text-center flex flex-col justify-center items-center"
           initial={{ opacity: 0, y: 20 }}
@@ -81,18 +77,18 @@ const Projects = () => {
           <h2 className="font-display tracking-wide text-4xl font-bold text-gray-50">
             Projects
           </h2>
+          {/* --- THIS IS THE FIX --- */}
           <p className="text-gray-500">
-            A selection of projects I've built.
+            A selection of projects I&apos;ve built.
           </p>
+          {/* --- END FIX --- */}
         </motion.div>
 
-        {/* --- Projects Grid (UPDATED) --- */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projectsData.map((project, index) => (
             <ProjectCard
               key={project.id}
               project={project}
-              // Stagger the animation for each card
               delay={index * 0.15}
             />
           ))}
@@ -104,7 +100,6 @@ const Projects = () => {
 
 export default Projects;
 
-// 3. PROJECT CARD SUB-COMPONENT
 const ProjectCard = ({
   project,
   delay,
@@ -120,7 +115,6 @@ const ProjectCard = ({
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.6, delay: delay }}
     >
-      {/* --- Image (using <img> tag) --- */}
       <div className="w-full aspect-video border-b border-gray-700 overflow-hidden">
         <img
           src={project.imageUrl}
@@ -129,7 +123,6 @@ const ProjectCard = ({
         />
       </div>
 
-      {/* --- Content (UPDATED) --- */}
       <div className="p-4 flex flex-col flex-grow">
         <h3 className="text-lg font-display font-semibold text-gray-50 mb-2">
           {project.title}
@@ -138,7 +131,6 @@ const ProjectCard = ({
           {project.description}
         </p>
 
-        {/* --- Tags (UPDATED) --- */}
         <div className="flex flex-wrap gap-2 mb-4">
           {project.tags.map((tag) => (
             <span
@@ -150,7 +142,6 @@ const ProjectCard = ({
           ))}
         </div>
 
-        {/* --- Links --- */}
         <div className="flex gap-4 items-center">
           <Link
             href={project.githubUrl}
@@ -162,7 +153,6 @@ const ProjectCard = ({
             Code
           </Link>
 
-          {/* Conditionally render live link if it exists */}
           {project.liveUrl && (
             <>
               <span className="text-gray-600">|</span>

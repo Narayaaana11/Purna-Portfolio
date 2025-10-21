@@ -2,18 +2,16 @@
 
 import {
   Code2Icon,
-  GithubIcon, // Added
-  InstagramIcon,
-  LinkedinIcon, // Added
-  MailIcon, // Added
+  GithubIcon,
+  LinkedinIcon,
+  MailIcon,
 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import { BsWhatsapp } from "react-icons/bs";
+// import { BsWhatsapp } from "react-icons/bs"; // Removed
 import { GoMoveToTop } from "react-icons/go";
 
 const Footer: React.FC = () => {
-  // Common style for social icon links
   const linkClassName =
     "p-2 text-gray-400 hover:text-gray-100 hover:scale-110 transition-all duration-200 rounded-lg";
 
@@ -60,7 +58,7 @@ const Footer: React.FC = () => {
                 >
                   <GithubIcon size={22} />
                 </Link>
-              </li>             
+              </li>
               <li>
                 <Link
                   href="mailto:your.email@example.com" // <-- CHANGEME
